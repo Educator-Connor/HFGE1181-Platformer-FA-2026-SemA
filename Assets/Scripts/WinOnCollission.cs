@@ -5,12 +5,12 @@ using Random = UnityEngine.Random;
 
 public class WinOnCollission : MonoBehaviour
 {
-    private string sceneName;
-    private void Start()
-    {
-        sceneName = SceneManager.GetActiveScene().name;
-    }
+    public GameObject winScreen;
 
+    public void Start()
+    {
+        winScreen.SetActive(false);
+    }
 
     private void OnTriggerEnter2D(Collider2D trig)
     {
@@ -21,7 +21,7 @@ public class WinOnCollission : MonoBehaviour
         
         if (trig.gameObject.CompareTag("Player"))
         {
-            SceneManager.LoadScene(sceneName);
+            winScreen.SetActive(true);
         }
     }
 
