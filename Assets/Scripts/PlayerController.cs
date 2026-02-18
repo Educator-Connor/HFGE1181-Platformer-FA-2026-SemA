@@ -11,7 +11,6 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D rb;
     private bool isGrounded = false;
-    private Animator anim;
     private float moveInputX;
     private float moveInputY;
     private bool onJumpPad = false;
@@ -20,7 +19,6 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -32,32 +30,16 @@ public class PlayerController : MonoBehaviour
         if (moveInputX > 0)
         {
             transform.localScale = new Vector3(1, 1, 1);
-            anim.SetBool("isMoving", true);
         }
         else if (moveInputX < 0)
         {
             transform.localScale = new Vector3(-1, 1, 1);
-            anim.SetBool("isMoving", true);
-        }
-        else
-        {
-            anim.SetBool("isMoving", false);
         }
         
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundMask);
-
-        if (isGrounded)
-        {
-            anim.SetBool("isGrounded", true);
-        }
-        else
-        {
-            anim.SetBool("isGrounded", false);
-        }
        
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            anim.SetTrigger("Jump");
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
     }
@@ -73,11 +55,6 @@ public class PlayerController : MonoBehaviour
         {
             rb.linearVelocity = new Vector2( moveInputX * moveSpeed, rb.linearVelocity.y);
         }
-    }
-
-    public void HurtTrigger()
-    {
-        anim.SetTrigger("Hurt");
     }
 
     public void SetJumpPadStatus(bool currentState)

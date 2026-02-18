@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class JumpPad : MonoBehaviour
 {
-    public Animator anim;
     public enum ForceDirection { up, left, right, leftDiagonal, rightDiagonal}
     public ForceDirection forceDirection;
 

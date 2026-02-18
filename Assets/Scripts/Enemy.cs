@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    //public enum EnemyStateMachine {idle, patrol, chase}
-    //public EnemyStateMachine stateMachine;
     public Transform targetCheck;
 
     public int patrolIndex = 0;
@@ -14,13 +12,6 @@ public class Enemy : MonoBehaviour
 
     public float movementSpeed;
     public float delay;
-
-  //  private Animator anim;
-
-    private void Awake()
-    {
-     //   anim = GetComponent<Animator>();
-    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -31,15 +22,12 @@ public class Enemy : MonoBehaviour
   
     public IEnumerator Idle()
     {
-        //Debug.Log("Distance: " + Vector2.Distance(transform.position, patrolPoints[patrolIndex].position));
-      //  anim.SetBool("Idle", true);
         yield return new WaitForSeconds(delay);
         yield return StartCoroutine("Patrol");
     }
 
     public IEnumerator Patrol()
     {
-      //  anim.SetBool("Idle", false);
         if (transform.position.x > patrolPoints[patrolIndex].position.x)
         {
             transform.localScale = new Vector3(1, 1, 1);
@@ -70,13 +58,6 @@ public class Enemy : MonoBehaviour
             
             yield return StartCoroutine("Idle");
         }
-        
-        /*
-        else
-        {
-            yield return StartCoroutine("Patrol");
-        }
-        */
         
     }
 
